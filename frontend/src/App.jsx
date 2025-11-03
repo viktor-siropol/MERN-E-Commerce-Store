@@ -1,12 +1,15 @@
-import "react-toastify/dist/ReactToastify.css"; 
-function App () { 
-  return ( 
-    <> 
-      <main className="py-3"> 
-        <h1 className="text-3xl font-bold underline bg-inherit "> Hello world!s </h1> 
-      </main> 
-    </> 
-  ); 
-}; 
+import Navigation from "./pages/Auth/Navigation";
+import { Outlet } from "react-router";
+import { ToastContainer } from "react-toastify";
 
-export default App;
+export default function App() {
+  return (
+    <>
+      <ToastContainer />
+      <Navigation />
+      <main className="py-3">
+        <Outlet />
+      </main>
+    </>
+  );
+}
