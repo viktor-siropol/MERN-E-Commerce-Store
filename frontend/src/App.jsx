@@ -5,11 +5,11 @@ import { ToastContainer } from "react-toastify";
 export default function App() {
   return (
     <>
-      <ToastContainer />
-      <Navigation />
-      <main className="py-3">
-        <Outlet />
-      </main>
+        <ToastContainer />
+        <Navigation />
+        <main className="py-3">
+          <Outlet />
+        </main>
     </>
   );
 }
