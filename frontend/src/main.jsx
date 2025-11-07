@@ -8,8 +8,8 @@ import {
   createRoutesFromElements, 
   createBrowserRouter, 
 } from "react-router-dom";
-import {StoreProvider} from 'easy-peasy';
 import store from './redux/features/store.js';
+import { Provider } from 'react-redux';
 
 const router = createBrowserRouter(
   createRoutesFromElements(<Route path='/' element={<App/> }/>)
@@ -17,8 +17,8 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <StoreProvider store={store}>
-    <RouterProvider router={router}/>
-    </StoreProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+    </Provider>
   </StrictMode>
 );

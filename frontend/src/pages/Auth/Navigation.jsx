@@ -17,7 +17,7 @@ import { logout } from "../../redux/features/auth/authSlice";
 
 const Navigation = () => {
 
-  
+  const { userInfo } = useSelector((state) => state.auth);
   
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -34,6 +34,20 @@ const Navigation = () => {
   const closeSidebar = () => {
     setShowSidebar(false);
   };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
 
   return <div style={{zIndex: 999}} className={ `${showSidebar ? "hidden" : "flex"} xl: flex lg:flex md: hidden sm: hidden flex-col justify-between p-4 text-white bg-black w-[4%] hover:w-[15%] h-[100vh] fixed`} id="navigation-container">
@@ -73,6 +87,11 @@ const Navigation = () => {
           onClick={toggleDropdown}
           className="flex items-center text-gray-800 focus:outline-none"
         >
+          {userInfo ? (
+            <span className="text-white">{userInfo.username}</span>
+          ) : (
+            <></>
+          )}
         </button>
     </div>
 
