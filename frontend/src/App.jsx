@@ -1,17 +1,36 @@
+import { Outlet, RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import Navigation from "./pages/Auth/Navigation";
-import { Outlet } from "react-router";
 import { ToastContainer } from "react-toastify";
-import store from './redux/features/store.js';
-import { Provider } from 'react-redux';
+import "react-toastify/dist/ReactToastify.css";
 
-export default function App() {
+// Auth
+import Login from "./pages/Auth/Login.jsx";
+
+
+
+const Layout = () => {
   return (
-    <Provider store={store}>
-        <ToastContainer />
-        <Navigation />
-        <main className="py-3">
-          <Outlet />
-        </main>
-    </Provider>
+    <>
+      <ToastContainer />
+      <Navigation />
+      <main className="py-3">
+        <Outlet />
+      </main>
+    </>
   );
-}
+};
+
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route path="/login" element={<Login />} />
+    </Route>
+  )
+);
+
+const App = () => {
+  return <RouterProvider router={router} />;
+};
+
+export default App;
