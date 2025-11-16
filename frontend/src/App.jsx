@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Auth
 import Login from "./pages/Auth/Login.jsx";
+import Register from "./pages/Auth/Register.jsx"
 
 
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
     </Route>
   )
 );
