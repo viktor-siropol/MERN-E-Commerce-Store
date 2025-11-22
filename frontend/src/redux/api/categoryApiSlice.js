@@ -1,10 +1,8 @@
 import { apiSlice } from "./apiSlice";
-import { CATEGORY_URL } from "../features/constants";
-import { updateCategory } from "../../../../backend/controllers/categoryController";
+import { CATEGORY_URL } from "../features/constants.js";
 
 export const categoryApiSlice = apiSlice.injectEndpoints({
-  endpoints:(builder) =>({
-
+  endpoints: (builder) => ({
     createCategory: builder.mutation({
       query: (newCategory) => ({
         url: `${CATEGORY_URL}`,
@@ -14,10 +12,10 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
     }),
 
     updateCategory: builder.mutation({
-      query: ({categoryId, updateCategory}) => ({
+      query: ({ categoryId, updatedCategory }) => ({
         url: `${CATEGORY_URL}/${categoryId}`,
-        method: `PUT`,
-        body: updateCategory,
+        method: "PUT",
+        body: updatedCategory,
       }),
     }),
 
