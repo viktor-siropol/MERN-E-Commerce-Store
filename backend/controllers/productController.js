@@ -175,5 +175,14 @@ const fetchTopProducts = asyncHandler(async (req, res)=> {
   }
 });
 
+const fetchNewProducts = asyncHandler(async (req, res)=> {
+  try {
+    const products = await  Product.find({}).sort({_id: -1}).limit(5)
+    res.json(products);
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"Server error"});
+  }
+});
 
-export {addProduct, updateProductDetails, removeProduct, fetchProducts, fetchProductsById, fetchAllProducts, addProductReview, fetchTopProducts, };
+export {addProduct, updateProductDetails, removeProduct, fetchProducts, fetchProductsById, fetchAllProducts, addProductReview, fetchTopProducts, fetchNewProducts,};
