@@ -18,7 +18,7 @@ const ProductCard = ({ p }) => {
   };
 
   return (
-    <div className="relative w-[15rem] h-[22rem] bg-[#151515] rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="relative w-[19rem] h-[22rem] bg-[#151515] rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       {/* Heart Icon */}
       <div className="absolute top-2 right-2 z-10">
         <HeartIcon product={p} />
@@ -35,16 +35,13 @@ const ProductCard = ({ p }) => {
         </Link>
       </div>
 
-      {/* Product Info */}
       <div className="p-3 flex flex-col h-[calc(100%-10rem)]">
-        {/* Product Name - with truncation */}
         <Link to={`/product/${p._id}`}>
           <h2 className="text-lg font-semibold text-gray-400 mb-1 line-clamp-1 h-7">
             {p.name}
           </h2>
         </Link>
 
-        {/* Product Description - truncated */}
         <p className="text-md text-gray-400 mb-2 line-clamp-2 h-10">
           {p.description}
         </p>
@@ -59,14 +56,11 @@ const ProductCard = ({ p }) => {
           <span className="text-sm text-gray-400">{p.numReviews} reviews</span>
         </div>
 
-        {/* Price and Button Container - FIXED LAYOUT */}
         <div className="mt-auto flex items-center justify-between">
-          {/* Price - zajmuje lewą stronę */}
           <div className="text-lg font-bold text-pink-600">
             ${p.price.toFixed(2)}
           </div>
           
-          {/* Button - zajmuje prawą stronę */}
           <Link
             to={`/product/${p._id}`}
             className="bg-pink-500 hover:bg-pink-600 text-white py-1 px-3 rounded text-sm transition-colors duration-200"
