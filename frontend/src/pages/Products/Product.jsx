@@ -4,11 +4,11 @@ import HeartIcon from "./HeartIcon";
 const Product = ({ product }) => {
   return (
     <div className="w-[30rem] ml-[2rem] p-3 relative">
-      <div className="relative">
+      <div className="relative h-[20rem] overflow-hidden rounded">
         <img
           src={product.image}
           alt={product.name}
-          className="w-[30rem] rounded"
+          className="w-full h-full object-fill" 
         />
         <HeartIcon product={product} />
       </div>

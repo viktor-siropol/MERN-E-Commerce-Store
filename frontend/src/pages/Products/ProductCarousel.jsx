@@ -55,7 +55,7 @@ const ProductCarousel = () => {
                 <img
                   src={image}
                   alt={name}
-                  className="w-full rounded-lg object-cover h-[30rem]"
+                  className="w-full rounded-lg object-fill h-[30rem]"
                 />
 
                 <div className="mt-4 flex justify-between">
