@@ -49,12 +49,12 @@ const Login = () => {
       
       <form onSubmit={submitHandler} className="container w-[40rem]">
         <div className="my-[2rem]"> 
-          <label htmlFor="email" className="block text-sm font-medium text-black">Email Adress</label>
-          <input type="email" id="email" className="mt-1 p-2 border rounded w-full" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <label htmlFor="email" className="block text-sm font-medium text-white">Email Adress</label>
+          <input type="email" id="email" className="mt-1 p-2 border rounded w-full !text-gray-900" value={email} onChange={(e) => setEmail(e.target.value)}/>
         </div>
         <div className="my-[2rem]"> 
-          <label htmlFor="password" className="block text-sm font-medium text-black">Password</label>
-          <input type="password" id="password" className="mt-1 p-2 border rounded w-full" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <label htmlFor="password" className="block text-sm font-medium text-white">Password</label>
+          <input type="password" id="password" className="mt-1 p-2 border rounded w-full !text-gray-900" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
 
         <button
@@ -69,18 +69,21 @@ const Login = () => {
       </form>
 
       <div className="mt-4">
-        <p className="text-black">
+        <p className="text-white">
           New Customer? {""}
           <Link to={redirect ? `/register?redirect=${redirect}` : '/register'} className="text-pink-500 hover:underline">Register</Link>
         </p> 
 
       </div>
     </div>
-    <img
-      src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
-      alt=""
-      className="h-[65rem] w-[59%] xl:block md:hidden sm:hidden rounded-lg"
-    />
+      {/* Prawa strona - zdjęcie */}
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80"
+          alt=""
+          className="h-[65rem] w-[105rem] xl:block md:hidden sm:hidden rounded-lg"
+        />
+      </div>
   </section>
 </div>
 

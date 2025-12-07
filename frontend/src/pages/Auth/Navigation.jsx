@@ -55,6 +55,8 @@ const Navigation = () => {
   return ( 
   <div 
     style={{zIndex: 999}} 
+    onMouseEnter={() => setDropdownOpen(false)}
+    onMouseLeave={() => setDropdownOpen(false)}
     className={ `${
       showSidebar ? "hidden" : "flex"
       } xl: flex lg:flex md: hidden sm: hidden flex-col justify-between p-4 text-white bg-black w-[4%] hover:w-[15%] h-[100vh] fixed`} 
@@ -123,16 +125,18 @@ const Navigation = () => {
         
          {dropdownOpen && userInfo && (
           <ul
-            className={`absolute right-0 mt-2 mr-35 space-y-2 bg-white text-gray-600 ${
+            className={`absolute right-0 mt-2 mr-35 space-y-2 bg-[#0f0f10] text-white ${
               !userInfo.isAdmin ? "-top-20" : "-top-80"
-            } `}
+            } 
+            translate-x-2
+            `}
           >
             {userInfo.isAdmin && (
               <>
                 <li>
                   <Link
                     to="/admin/dashboard"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 text-white hover:bg-[#1b1b1d]"
                   >
                     Dashboard
                   </Link>
@@ -140,7 +144,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/productlist"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 text-white hover:bg-[#1b1b1d]"
                   >
                     Products
                   </Link>
@@ -148,7 +152,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/categorylist"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 text-white hover:bg-[#1b1b1d]"
                   >
                     Category
                   </Link>
@@ -156,7 +160,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/orderlist"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 text-white hover:bg-[#1b1b1d]"
                   >
                     Orders
                   </Link>
@@ -164,7 +168,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/userlist"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 text-white hover:bg-[#1b1b1d]"
                   >
                     Users
                   </Link>
@@ -173,14 +177,14 @@ const Navigation = () => {
             )}
 
             <li>
-              <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
+              <Link to="/profile" className="block px-4 py-2 text-white hover:bg-[#1b1b1d]">
                 Profile
               </Link>
             </li>
-            <li>
+            <li className="w-full">
               <button
                 onClick={logoutHandler}
-                className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                className="block w-full text-left px-4 py-2 text-white hover:bg-[#1b1b1d]"
               >
                 Logout
               </button>

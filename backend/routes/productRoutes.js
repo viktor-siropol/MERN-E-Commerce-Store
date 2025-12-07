@@ -8,7 +8,7 @@ import {
   updateProductDetails,
   removeProduct,
   fetchProducts,
-  fetchProductsById,
+  fetchProductById,
   fetchAllProducts,
   addProductReview,
   fetchTopProducts,
@@ -20,9 +20,9 @@ import checkId from "../middlewares/checkId.js";
 router
   .route("/")
   .get(fetchProducts)
-  .post(authenticate, authorizeAdmin, formidable(), addProduct);
+  .post(formidable(), addProduct);
 
-router.route('/allproducts').get(fetchAllProducts)
+router.route('/allProducts').get(fetchAllProducts)
 
 router
   .route("/:id/reviews")
@@ -33,7 +33,7 @@ router.get("/new", fetchNewProducts);
 
 router
   .route("/:id")
-  .get(fetchProductsById)
+  .get(fetchProductById)
   .put(authenticate, authorizeAdmin, formidable(), updateProductDetails)
   .delete(authenticate, authorizeAdmin, formidable(), removeProduct);
 

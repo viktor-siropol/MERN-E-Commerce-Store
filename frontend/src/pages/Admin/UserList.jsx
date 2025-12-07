@@ -8,8 +8,7 @@ import {
   useUpdateUserMutation,
 } from "../../redux/api/usersApiSlice";
 import { toast } from "react-toastify";
-// ⚠️⚠️⚠️ don't forget this ⚠️⚠️⚠️⚠️
-// import AdminMenu from "./AdminMenu";
+import AdminMenu from "./AdminMenu";
 
 const UserList = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
@@ -68,7 +67,7 @@ const UserList = () => {
         </Message>
       ) : (
         <div className="flex flex-col md:flex-row">
-          {/* <AdminMenu /> */}
+          <AdminMenu />
           <table className="w-full md:w-4/5 mx-auto">
             <thead>
               <tr>
@@ -90,7 +89,8 @@ const UserList = () => {
                           type="text"
                           value={editableUserName}
                           onChange={(e) => setEditableUserName(e.target.value)}
-                          className="w-full p-2 border rounded-lg"
+                          className="w-full p-2 border rounded-lg !text-gray-900"
+                          style={{ color: '#000 !important' }}
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -119,11 +119,12 @@ const UserList = () => {
                           type="text"
                           value={editableUserEmail}
                           onChange={(e) => setEditableUserEmail(e.target.value)}
-                          className="w-full p-2 border rounded-lg"
+                          className="w-full p-2 border rounded-lg !text-gray-900"
+                          style={{ color: '#000 !important' }}
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
-                          className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-lg"
+                          className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-lg "
                         >
                           <FaCheck />
                         </button>
