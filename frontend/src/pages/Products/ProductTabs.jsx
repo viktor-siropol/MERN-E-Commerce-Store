@@ -72,7 +72,7 @@ const ProductTabs = ({
                     required
                     value={rating}
                     onChange={(e) => setRating(e.target.value)}
-                    className="p-2 border border-gray-600 rounded-lg xl:w-[40rem] bg-black text-white"
+                    className="p-2 border border-gray-600 rounded-lg xl:w-[40rem] bg-[#151515] text-white"
 
                   >
                     <option value="">Select</option>
@@ -95,7 +95,7 @@ const ProductTabs = ({
                     required
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    className="p-2 border border-gray-600 rounded-lg xl:w-[40rem] bg-black text-white"
+                    className="p-2 border border-gray-600 rounded-lg xl:w-[40rem] bg-[#151515] text-white"
 
                   ></textarea>
                 </div>

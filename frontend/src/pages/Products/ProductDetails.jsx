@@ -19,7 +19,7 @@ import moment from "moment";
 import HeartIcon from "./HeartIcon";
 import Ratings from "./Ratings";
 import ProductTabs from "./ProductTabs";
-// import { addToCart } from "../../redux/features/cart/cartSlice";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -142,7 +142,7 @@ const ProductDetails = () => {
                     <select
                       value={qty}
                       onChange={(e) => setQty(e.target.value)}
-                      className="p-2 w-[6rem] rounded-lg bg-black text-white border border-gray-600"
+                      className="p-2 w-[6rem] rounded-lg bg-[#151515] text-white border border-gray-600"
                     >
                       {[...Array(product.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>

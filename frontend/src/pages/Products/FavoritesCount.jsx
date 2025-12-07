@@ -5,13 +5,13 @@ const FavoritesCount = () => {
   const favoriteCount = favorites.length;
 
   return (
-    <div className="absolute left-2 top-8">
+    <>
       {favoriteCount > 0 && (
-        <span className="px-1 py-0 text-sm text-white bg-pink-500 rounded-full">
+        <span className="absolute left-4 top-7 bg-pink-500 text-white rounded-full min-w-[20px] h-[20px] flex items-center justify-center text-xs font-bold">
           {favoriteCount}
         </span>
       )}
-    </div>
+    </>
   );
 };
 
