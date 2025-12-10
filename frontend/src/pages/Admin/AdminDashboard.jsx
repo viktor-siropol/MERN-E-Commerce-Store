@@ -17,60 +17,110 @@ const AdminDashboard = () => {
   const { data: orders, isLoading: loadingTwo } = useGetTotalOrdersQuery();
   const { data: salesDetail } = useGetTotalSalesByDateQuery();
 
-  const state = {
-    series: [
-      {
-        name: "Sales",
-        data: [10, 11, 8, 12, 9, 7, 10, 11, 12, 9],
-      },
-    ],
-    options: {
-      chart: {
-        background: "transparent",
-        foreColor: "#fff",
-      },
-      xaxis: {
-        labels: {
-          style: {
-            colors: "#fff",
+  
+
+const [state, setState] = useState({
+  options: {
+    chart: {
+      type: "line",
+      background: 'transparent',
+      toolbar: {
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true
+        },
+        export: {
+          csv: {
+            filename: "sales-data",
           },
-        },
-        axisBorder: {
-          color: "#888",
-        },
-        axisTicks: {
-          color: "#888",
-        },
-      },
-      yaxis: {
-        labels: {
-          style: {
-            colors: "#fff",
+          svg: {
+            filename: "sales-chart",
           },
-        },
-      },
-      grid: {
-        borderColor: "rgba(255,255,255,0.1)",
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 4,
-        },
-      },
-      colors: ["#4CAF50"], // kolor słupków
-      title: {
-        text: "Sales Trend",
-        style: {
-          color: "#fff",
-        },
-      },
+          png: {
+            filename: "sales-chart",
+          }
+        }
+      }
     },
-  };
+    tooltip: {
+      theme: "dark",
+    },
+    colors: ["#00E396"],
+    dataLabels: {
+      enabled: true,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+    title: {
+      text: "Sales Trend",
+      align: "left",
+      style: {
+        color: "#fff"
+      }
+    },
+    grid: {
+      borderColor: "#ccc",
+    },
+    markers: {
+      size: 1,
+    },
+    xaxis: {
+      categories: [],
+      title: {
+        text: "Date",
+        style: {
+          color: "#fff"
+        }
+      },
+      labels: {
+        style: {
+          colors: "#fff"
+        }
+      }
+    },
+    yaxis: {
+      title: {
+        text: "Sales",
+        style: {
+          color: "#fff"
+        }
+      },
+      min: 0,
+      labels: {
+        style: {
+          colors: "#fff"
+        }
+      }
+    },
+    legend: {
+      position: "top",
+      horizontalAlign: "right",
+      floating: true,
+      offsetY: -25,
+      offsetX: -5,
+      labels: {
+        colors: "#fff"
+      }
+    },
+    theme: {
+      mode: "dark",
+      palette: "palette1",
+    }
+  },
+  series: [{ name: "Sales", data: [] }],
+});
 
 
 
-    useEffect(() => {
-    if (Array.isArray(salesDetail)) {
+useEffect(() => {
+  console.log(salesDetail);
+    if (salesDetail) {
       const formattedSalesDate = salesDetail.map((item) => ({
         x: item._id,
         y: item.totalSales,
@@ -84,12 +134,15 @@ const AdminDashboard = () => {
             categories: formattedSalesDate.map((item) => item.x),
           },
         },
+
         series: [
           { name: "Sales", data: formattedSalesDate.map((item) => item.y) },
         ],
       }));
     }
   }, [salesDetail]);
+
+
 
 
   return (
@@ -130,14 +183,15 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="ml-[10rem] mt-[4rem]">
-          <Chart
-            options={state.options}
-            series={state.series}
-            type="bar"
-            width="70%"
-          />
-        </div>
+      <div className="ml-[10rem] mt-[4rem] bg-black p-5 rounded-xl w-[70%]">
+        <Chart
+          options={state.options}
+          series={state.series}
+          type="bar"
+          height={350}
+        />
+      </div>
+
 
         <div className="mt-[4rem]">
           <OrderList />

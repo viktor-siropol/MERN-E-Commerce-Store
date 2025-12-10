@@ -1,3 +1,4 @@
+import { FaCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFilteredProductsQuery } from "../redux/api/productApiSlice";
@@ -10,6 +11,7 @@ import {
 } from "../redux/features/shop/shopSlice";
 import Loader from "../components/Loader";
 import ProductCard from "./Products/ProductCard";
+
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -182,77 +184,146 @@ const Shop = () => {
               </div>
             )}
 
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                <svg className="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                </svg>
-                Categories
-              </h3>
-              <div className="space-y-2.5">
-                {categories?.map((c) => (
-                  <div key={c._id} className="flex items-center hover:bg-gray-800/50 px-2 py-1.5 rounded-lg transition-colors">
-                    <input
-                      type="checkbox"
-                      id={`category-${c._id}`}
-                      checked={checked.includes(c._id)}
-                      onChange={(e) => handleCheck(e.target.checked, c._id)}
-                      className="w-4 h-4 text-pink-500 bg-gray-700 border-gray-600 rounded focus:ring-pink-500 focus:ring-2"
-                    />
-                    <label
-                      htmlFor={`category-${c._id}`}
-                      className="ml-3 text-sm text-gray-300 hover:text-white cursor-pointer flex-1"
-                    >
-                      {c.name}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-pink mb-4 flex items-center">
+            <svg className="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+            </svg>
+            Categories
+          </h3>
+          <div className="space-y-2.5">
+            {categories?.map((c) => {
+              const isChecked = checked.includes(c._id);
+              return (
+                <div className="flex items-center gap-3" key={c._id}>
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <div className="relative w-5 h-5 flex-shrink-0">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={(e) => handleCheck(e.target.checked, c._id)}
+                        className="
+                          absolute
+                          w-5 h-5
+                          opacity-0
+                          z-10
+                          cursor-pointer
+                        "
+                      />
+
+                      <div className="
+                        w-5 h-5
+                        rounded-md
+                        border border-gray-400
+                        bg-[#1a1a1a]
+                        transition-all duration-150
+                        flex items-center justify-center
+                        overflow-hidden
+                        relative
+                      ">
+                        <div className={`
+                          absolute inset-0
+                          rounded-md
+                          bg-pink-600
+                          transition-all duration-200
+                          ${isChecked ? 'opacity-100' : 'opacity-0 scale-75'}
+                        `}></div>
+                        
+                        {isChecked && (
+                          <FaCheck className="w-3 h-3 text-white relative z-10" />
+                        )}
+                      </div>
+                    </div>
+
+                    <span className="text-white">{c.name}</span>
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
 
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-white flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                  Brands
-                </h3>
-                {selectedBrands.length > 0 && (
-                  <span className="text-xs text-pink-400 bg-pink-500/20 px-2 py-1 rounded-full">
-                    {selectedBrands.length} selected
-                  </span>
-                )}
-              </div>
-              <div className="space-y-2.5 max-h-64 overflow-y-auto pr-2">
-                {uniqueBrands?.map((brand) => (
-                  <div key={brand} className="flex items-center hover:bg-gray-800/50 px-2 py-1.5 rounded-lg transition-colors">
-                    <input
-                      type="checkbox"
-                      id={`brand-${brand}`}
-                      checked={selectedBrands.includes(brand)}
-                      onChange={() => handleBrandToggle(brand)}
-                      className="w-4 h-4 text-pink-500 bg-gray-700 border-gray-600 rounded focus:ring-pink-500 focus:ring-2"
-                    />
-                    <label
-                      htmlFor={`brand-${brand}`}
-                      className="ml-3 text-sm text-gray-300 hover:text-white cursor-pointer flex-1"
-                    >
+        <div className="mb-6 ">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold text-white flex items-center">
+              <svg className="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              Brands
+            </h3>
+            {selectedBrands.length > 0 && (
+              <span className="text-xs text-pink-400 bg-pink-500/20 px-2 py-1 rounded-full">
+                {selectedBrands.length} selected
+              </span>
+            )}
+          </div>
+          <div className="space-y-2 max-h-64 overflow-y-auto pr-2 -ml-2">
+            {uniqueBrands?.map((brand) => {
+              const isChecked = selectedBrands.includes(brand);
+              const brandId = `brand-${brand.replace(/\s+/g, '-').toLowerCase()}`;
+              
+              return (
+                <div key={brand} className="flex items-center hover:bg-gray-800/50 px-2 py-1 rounded-lg transition-colors">
+                  <label 
+                    htmlFor={brandId}
+                    className="flex items-center gap-3 cursor-pointer flex-1"
+                  >
+                    <div className="relative w-5 h-5 flex-shrink-0">
+                      <input
+                        id={brandId}
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() => handleBrandToggle(brand)}
+                        className="
+                          absolute
+                          w-5 h-5
+                          opacity-0
+                          z-10
+                          cursor-pointer
+                        "
+                      />
+                      <div className="
+                        w-5 h-5
+                        rounded-md
+                        border border-gray-400
+                        bg-[#1a1a1a]
+                        transition-all duration-150
+                        flex items-center justify-center
+                        overflow-hidden
+                        relative
+                      ">
+                        <div className={`
+                          absolute inset-0
+                          rounded-md
+                          bg-pink-600
+                          transition-all duration-200
+                          ${isChecked ? 'opacity-100' : 'opacity-0 scale-75'}
+                        `}></div>
+                        
+                        {isChecked && (
+                          <FaCheck className="w-3 h-3 text-white relative z-10" />
+                        )}
+                      </div>
+                    </div>
+
+                    <span className="text-gray-300 hover:text-white text-sm">
                       {brand}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
+                    </span>
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                <svg className="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Max Price
-              </h3>
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
+            <svg className="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+             Max Price
+          </h3>
               <div className="relative">
                 <div className="flex items-center">
                   <span className="absolute left-3 text-gray-400">$</span>

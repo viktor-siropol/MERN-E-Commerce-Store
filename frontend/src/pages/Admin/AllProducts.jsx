@@ -7,8 +7,6 @@ import {
   FaUser, 
   FaStar, 
   FaBox, 
-  FaArrowLeft, 
-  FaArrowRight,
   FaChevronLeft,
   FaChevronRight
 } from "react-icons/fa"; 

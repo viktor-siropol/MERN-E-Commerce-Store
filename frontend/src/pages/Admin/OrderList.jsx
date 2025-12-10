@@ -16,8 +16,10 @@ const OrderList = () => {
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <table className="container mx-auto">
+        <div>
           <AdminMenu />
+        <table className="container mx-auto">
+          
 
           <thead className="w-full border">
             <tr className="mb-[5rem]">
@@ -78,15 +80,16 @@ const OrderList = () => {
 
                 <td>
                   <Link to={`/order/${order._id}`}>
-                  <div className="bg-pink-400 text-back py-2 px-1 mr-left rounded">
-                    <button>More</button>
-                  </div>
+                    <div className="bg-pink-400 text-white py-2 px-4 mr-left rounded text-center">
+                      <button className="w-full">More</button>
+                    </div>
                   </Link>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        </div>
       )}
     </>
   );
