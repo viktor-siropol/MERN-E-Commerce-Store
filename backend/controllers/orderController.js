@@ -1,7 +1,6 @@
 import Order from "../models/orderModel.js";
 import Product from "../models/productModel.js";
 
-// Utility Function
 function calcPrices(orderItems) {
   const itemsPrice = orderItems.reduce(
     (acc, item) => acc + item.price * item.qty,
@@ -119,7 +118,7 @@ const calculateTotalSales = async(req,res) => {
   }
 }
 
-const calcualteTotalSalesByDate = async(req,res) => {
+const calcualteTotalSalesByDate = async (req, res) => {
   try {
     const salesByDate = await Order.aggregate([
       {
@@ -130,18 +129,21 @@ const calcualteTotalSalesByDate = async(req,res) => {
       {
         $group: {
           _id: {
-            $dateToString: {format: "%Y-%m-%d", date: "$paidAt"}
+            $dateToString: { format: "%Y-%m-%d", date: "$paidAt" },
           },
-          totalSales: {$sum: "totalPrice"},
+          totalSales: { $sum: "$totalPrice" },
         },
       },
     ]);
-    
-    res.json({salesByDate});
+
+    res.json(salesByDate);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
+
+
+
 
 const findOrderById = async (req, res) => {
   try {
